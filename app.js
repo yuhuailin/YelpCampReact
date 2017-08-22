@@ -22,13 +22,14 @@ var commentRoutes = require("./routes/comments"),
     
 // connect mongoose to db
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/yelp_camp", {useMongoClient: true});
+//mongoose.connect("mongodb://localhost/yelp_camp", {useMongoClient: true});
+mongoose.connect("mongodb://yuhuai:lsy19940921@ds155587.mlab.com:55587/yelpcamp_v1", {useMongoClient: true});
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-seedDB();
+// seedDB();
 
 // passport config
 app.use(require("express-session")({
