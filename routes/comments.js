@@ -39,9 +39,9 @@ router.post(
     console.log(req.params.comment_id);
     console.log(req.body.text);
     var comment = await Comment.findByIdAndUpdate(
-        {"_id" : req.params.comment_id },
-        {$set: {"text" : req.body.text}},
-        {new : true}
+      { _id: req.params.comment_id },
+      { $set: { text: req.body.text } },
+      { new: true }
     );
     console.log("comment: ", comment);
     const campgroundNew = await Campground.findById(req.params.id).populate(
