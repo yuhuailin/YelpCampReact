@@ -38,42 +38,44 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div>
         <Header page="login" />
-        <h1 style={{ textAlign: "center" }}>Login</h1>
-        <div style={{ width: "30%", margin: "25px auto" }}>
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label>
-                Username
-              </label>
-              <input
-                className="form-control"
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label>
-                Password
-              </label>
-              <input
-                className="form-control"
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <button className="btn btn-lg btn-primary btn-block">
-                Login
-              </button>
-            </div>
-          </form>
-          <Link to="/campgrounds">Go Back</Link>
+        <div className="row">
+          <h1 style={{ textAlign: "center" }}>Login</h1>
+          <div style={{ width: "30%", margin: "25px auto" }}>
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <label>
+                  Username
+                </label>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>
+                  Password
+                </label>
+                <input
+                  className="form-control"
+                  type="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <button className="btn btn-lg btn-primary btn-block">
+                  Login
+                </button>
+              </div>
+            </form>
+            <Link to="/campgrounds">Go Back</Link>
+          </div>
         </div>
       </div>
     );

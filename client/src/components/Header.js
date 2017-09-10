@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
-import * as actions from '../actions';
+import { connect } from "react-redux";
+import * as actions from "../actions";
+import { Navbar,Nav,NavItem } from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 
 class Header extends Component {
   renderErrorMessage() {
-    if(this.props.flash !== null) {
+    if (this.props.flash !== null) {
       return (
         <div className={`alert ${this.props.flash.className} role=alert`}>
           {this.props.flash.msg}
@@ -27,21 +29,27 @@ class Header extends Component {
         return;
       case false:
         return [
-          <li key="1" className={this.props.page === 'login' ? 'active' : ''}>
-            <Link to="/login">Login</Link>
-          </li>,
-          <li key="2" className={this.props.page === 'register' ? 'active' : ''}>
-            <Link to="/register">Register</Link>
-          </li>
+          <LinkContainer key={1} to="/login" isActive={()=>{return this.props.page === 'login'}}>
+            <NavItem>
+              Login
+            </NavItem>
+          </LinkContainer>,
+          <LinkContainer key={2} to="/register" isActive={()=>{return this.props.page === 'register'}}>
+            <NavItem>
+              Register
+            </NavItem>
+          </LinkContainer>
         ];
       default:
         return [
-          <li key="11">
-            <Link to="/campgrounds">Sign In As {this.props.auth.username}</Link>
-          </li>,
-          <li key="22">
-            <Link to="#" onClick={() => this.handleClick()}>Logout</Link>
-          </li>
+          <LinkContainer key={1} to="/campgrounds" isActive={()=>{return false}}>
+            <NavItem>
+              Sign In As {this.props.auth.username}
+            </NavItem>
+          </LinkContainer>,
+          <NavItem key={2} onClick={() => this.handleClick()} >
+            Logout
+          </NavItem>
         ];
     }
   }
@@ -49,53 +57,39 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-default">
-          <div className="container">
-            <div className="navbar-header">
-              <button
-                type="button"
-                className="navbar-toggle collapsed"
-                data-toggle="collapse"
-                data-target="#navbar"
-                aria-expanded="false"
-                aria-controls="navbar"
-              >
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar" />
-                <span className="icon-bar" />
-                <span className="icon-bar" />
-              </button>
-
+        <Navbar collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
               <Link className="navbar-brand" to="/">
                 YelpCamp
               </Link>
-            </div>
-            <div id="navbar" className="collapse navbar-collapse">
-              <ul className="nav navbar-nav">
-                <li className={this.props.page === 'home' ? 'active' : ''}>
-                  <Link to="/campgrounds">Home</Link>
-                </li>
-              </ul>
-              <ul className="nav navbar-nav navbar-right">
-                {this.renderContent()}
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <div className="container">
-          {this.renderErrorMessage()}
-        </div>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav>
+              <LinkContainer to="/campgrounds" isActive={()=>{return this.props.page === 'home'}}>
+                <NavItem>
+                  Home
+                </NavItem>
+              </LinkContainer>
+            </Nav>
+            <Nav pullRight>
+              {this.renderContent()}
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <div className="container">{this.renderErrorMessage()}</div>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return (
-    {
-      auth: state.auth,
-      flash: state.flash
-    });
+  return {
+    auth: state.auth,
+    flash: state.flash
+  };
 }
 
 export default connect(mapStateToProps, actions)(Header);

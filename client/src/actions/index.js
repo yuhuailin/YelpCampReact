@@ -72,6 +72,11 @@ export const deleteComment = (campId, commentId) => async dispatch => {
   dispatch({ type: FETCH_CAMPGROUND, payload: res });
 };
 
+export const loginError = (history) => async dispatch => {
+  history.push('/login');
+  dispatch({ type: FLASH_MESSAGE, payload: {msg: "You Must Log In!", className: "alert-danger"} });
+};
+
 export const login = (values, history) => async dispatch => {
   try {
     const res = await axios.post("/api/login", values);

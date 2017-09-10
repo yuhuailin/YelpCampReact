@@ -22,23 +22,25 @@ class UserForm extends Component {
 
   render() {
     return (
-      <div className="row">
-        <Header page={""} />
-        <h1 style={{ textAlign: "center" }}>Sign Up</h1>
-        <div style={{ width: "30%", margin: "25px auto" }}>
-          <form onSubmit={this.handleSubmit}>
-            {renderFields(formFields)}
-            <button
-              type="submit"
-              style={{ width: "35%" }}
-              className="btn btn-lg btn-primary pull-right"
-            >
-              Sign Up
-            </button>
-          </form>
-          <Link to="/campgrounds" className="btn btn-lg btn-danger pull-left">
-            cancel
-          </Link>
+      <div>
+        <Header page={"register"} />
+        <div className="row">
+          <h1 style={{ textAlign: "center" }}>Sign Up</h1>
+          <div style={{ width: "30%", margin: "25px auto" }}>
+            <form onSubmit={this.handleSubmit}>
+              {renderFields(formFields)}
+              <button
+                type="submit"
+                style={{ width: "35%" }}
+                className="btn btn-lg btn-primary pull-right"
+              >
+                Sign Up
+              </button>
+            </form>
+            <Link to="/campgrounds" className="btn btn-lg btn-danger pull-left">
+              cancel
+            </Link>
+          </div>
         </div>
       </div>
     );
