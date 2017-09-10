@@ -15,7 +15,7 @@ class CampgroundForm extends Component {
         <div style={{width:'30%', margin:'25px auto'}}>
           <form onSubmit={this.props.handleSubmit(this.props.onCampgroundSubmit)}>
             {renderFields(formFields)}
-            <button type="submit" style={{width: '35%'}}className="btn btn-lg btn-primary pull-right">
+            <button type="submit" style={{width: '35%'}} className="btn btn-lg btn-primary pull-right">
               Next
             </button>
           </form>

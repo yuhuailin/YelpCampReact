@@ -16,6 +16,11 @@ class Header extends Component {
       );
     }
   }
+
+  handleClick() {
+    this.props.logout();
+  }
+
   renderContent() {
     switch (this.props.auth) {
       case null:
@@ -35,7 +40,7 @@ class Header extends Component {
             <Link to="/campgrounds">Sign In As {this.props.auth.username}</Link>
           </li>,
           <li key="22">
-            <Link to="/logout">Logout</Link>
+            <Link to="#" onClick={() => this.handleClick()}>Logout</Link>
           </li>
         ];
     }

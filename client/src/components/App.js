@@ -7,7 +7,6 @@ import * as actions from '../actions';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
 import Login from './Login';
-import Logout from './Logout';
 import Register from './Register';
 import CampgroundNew from './campgrounds/CampgroundNew';
 import CampgroundDisplay from './campgrounds/CampgroundDisplay';
@@ -26,11 +25,10 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/logout" component={Logout} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/campgrounds" component={Dashboard} />
             <Route exact path="/campgrounds/new" component={CampgroundNew} />
-            <Route exact path="/campgrounds/:id/edit" component={CampgroundEdit} />
+            <Route path="/campgrounds/:id/edit" component={CampgroundEdit} />
             <Route path="/campgrounds/:id" component={CampgroundDisplay} />
             <Route path="/users/:id" component={UserDisplay} />
           </Switch>
