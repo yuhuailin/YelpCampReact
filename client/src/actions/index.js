@@ -16,6 +16,10 @@ export const fetchSomeCampground = (id) => async dispatch => {
   dispatch({ type: FETCH_CAMPGROUND, payload: res });
 };
 
+export const clearSomeCampground = () => async dispatch => {
+  dispatch({ type: FETCH_CAMPGROUND, payload: {'data':null} });
+};
+
 export const submitSearch = value => async dispatch => {
   const res = await axios.get("/api/campgrounds?search=" + value);
   dispatch({ type: FETCH_CAMPGROUNDS, payload: res });
