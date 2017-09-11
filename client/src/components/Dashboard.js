@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // react router setup
-import Header from './Header';
+import Header from './header/Header';
 import Searchbar from './Searchbar';
 import CampgroundList from './campgrounds/CampgroundList';
 

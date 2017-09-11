@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import formFields from "./formFields";
 import * as actions from '../../actions';
 import { withRouter } from 'react-router-dom';
-import Header from '../Header';
+import Header from '../header/Header';
 
 const CampgroundFormReview = ({ onCancel, formValues, submitCampground, history }) => {
   const reviewFields = _.map(formFields, ({ name, label }) => {

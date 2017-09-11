@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import Header from "../Header";
+import Header from '../header/Header';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../actions";

@@ -1,23 +1,24 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import * as actions from "../actions";
+import * as actions from "../../actions";
 import { Navbar,Nav,NavItem } from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
+import FlashMessage from './FlashMessage';
 
 class Header extends Component {
-  renderErrorMessage() {
-    if (this.props.flash !== null) {
-      return (
-        <div className={`alert ${this.props.flash.className} role=alert`}>
-          {this.props.flash.msg}
-          <button onClick={this.props.closeFlash} className="close">
-            <span>&times;</span>
-          </button>
-        </div>
-      );
-    }
-  }
+  // renderErrorMessage() {
+  //   if (this.props.flash !== null) {
+  //     return (
+  //       <div className={`alert ${this.props.flash.className} role=alert`}>
+  //         {this.props.flash.msg}
+  //         <button onClick={this.props.closeFlash} className="close">
+  //           <span>&times;</span>
+  //         </button>
+  //       </div>
+  //     );
+  //   }
+  // }
 
   handleClick() {
     this.props.logout();
@@ -79,7 +80,9 @@ class Header extends Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <div className="container">{this.renderErrorMessage()}</div>
+        <div className="container">
+          <FlashMessage/>
+        </div>
       </div>
     );
   }

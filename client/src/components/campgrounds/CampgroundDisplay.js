@@ -2,7 +2,7 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Header from "../Header";
+import Header from '../header/Header';
 import GoogleMap from "../GoogleMap";
 import Moment from "react-moment";
 import * as actions from "../../actions";

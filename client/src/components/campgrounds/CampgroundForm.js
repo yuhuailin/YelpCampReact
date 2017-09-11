@@ -2,7 +2,7 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
-import Header from '../Header';
+import Header from '../header/Header';
 import formFields from './formFields';
 import renderFields from "../forms/renderFields";
 
