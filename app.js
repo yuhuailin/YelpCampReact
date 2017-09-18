@@ -6,6 +6,7 @@ var express         = require("express"),
     mongoose        = require("mongoose"),
     passport        = require("passport"),
     LocalStrategy   = require("passport-local"),
+    methodOverride  = require("method-override"),
 
     // self defined module
     Campground      = require("./models/campground"),
@@ -23,7 +24,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, {useMongoClient: true});
 //app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-
+app.use(methodOverride("_method"));
 app.locals.moment = require('moment');
 // passport config
 app.use(require("express-session")({

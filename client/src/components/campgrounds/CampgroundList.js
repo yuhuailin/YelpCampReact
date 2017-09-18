@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCampgrounds } from '../../actions';
+import * as actions from '../../actions';
 import { Link } from 'react-router-dom';
 
 class CampgroundList extends Component {
   componentWillMount() {
+    this.props.clearSomeCampground();
     this.props.fetchCampgrounds();
   }
 
@@ -45,4 +46,4 @@ function mapStateToProps( state ) {
   return { campgrounds: state.campgrounds };
 }
 
-export default connect(mapStateToProps, { fetchCampgrounds })(CampgroundList);
+export default connect(mapStateToProps, actions)(CampgroundList);

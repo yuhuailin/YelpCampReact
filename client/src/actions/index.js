@@ -30,12 +30,6 @@ export const fetchCampgrounds = () => async dispatch => {
   dispatch({ type: FETCH_CAMPGROUNDS, payload: res });
 };
 
-export const deleteCampground= (id, history) => async dispatch => {
-  const res = await axios.get(`/api/campgrounds/${id}/delete`);
-  history.push('/campgrounds');
-  dispatch({ type: FETCH_CAMPGROUNDS, payload: res });
-};
-
 export const submitCampground = (values, history) => async dispatch => {
   try {
     const res = await axios.post("/api/campgrounds", values);
@@ -48,8 +42,15 @@ export const submitCampground = (values, history) => async dispatch => {
   }
 };
 
+export const deleteCampground= (id, history) => async dispatch => {
+  const res = await axios.post(`/api/campgrounds/${id}?_method=DELETE`);
+  history.push('/campgrounds');
+  dispatch({ type: FETCH_CAMPGROUNDS, payload: res });
+  dispatch({ type: FLASH_MESSAGE, payload: {msg:"Successful Deletion!", className: "alert-success"} });
+};
+
 export const editCampground = (campground, history) => async dispatch => {
-    const res = await axios.post(`/api/campgrounds/${campground._id}/edit`, {'campground':campground});
+    const res = await axios.post(`/api/campgrounds/${campground._id}?_method=PUT`, {'campground':campground});
     history.push(`/campgrounds/${campground._id}`);
     dispatch({ type: FETCH_CAMPGROUND, payload: res });
     dispatch({ type: FLASH_MESSAGE, payload: {msg:"Successful Edit!", className: "alert-success"} });
@@ -67,12 +68,12 @@ export const submitComment = (campId, comment, history) => async dispatch => {
 };
 
 export const editComment = (campId, commentId, text, history) => async dispatch => {
-  const res = await axios.post(`/api/campgrounds/${campId}/comments/${commentId}`, {'text': text});
+  const res = await axios.post(`/api/campgrounds/${campId}/comments/${commentId}?_method=PUT`, {'text': text});
   dispatch({ type: FETCH_CAMPGROUND, payload: res });
 };
 
 export const deleteComment = (campId, commentId) => async dispatch => {
-  const res = await axios.get(`/api/campgrounds/${campId}/comments/${commentId}/delete`);
+  const res = await axios.post(`/api/campgrounds/${campId}/comments/${commentId}?_method=DELETE`);
   dispatch({ type: FETCH_CAMPGROUND, payload: res });
 };
 

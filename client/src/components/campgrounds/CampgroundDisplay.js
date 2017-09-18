@@ -22,10 +22,6 @@ class CampgroundDisplay extends Component {
     this.props.fetchSomeCampground(this.props.match.params.id);
   }
 
-  componentWillUnmount() {
-    this.props.clearSomeCampground();
-  }
-
   handleCampgroundDelete(event) {
     this.props.deleteCampground(this.props.match.params.id, this.props.history);
     event.preventDefault();

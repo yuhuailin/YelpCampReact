@@ -31,19 +31,15 @@ router.post(
 );
 
 // COMMENT UPDATE
-router.post(
+router.put(
   "/api/campgrounds/:id/comments/:comment_id",
   middleware.checkCommentOwnership,
   async (req, res) => {
-    console.log(req.params.id);
-    console.log(req.params.comment_id);
-    console.log(req.body.text);
     var comment = await Comment.findByIdAndUpdate(
       { _id: req.params.comment_id },
       { $set: { text: req.body.text } },
       { new: true }
     );
-    console.log("comment: ", comment);
     const campgroundNew = await Campground.findById(req.params.id).populate(
       "comments"
     );
@@ -52,8 +48,8 @@ router.post(
 );
 
 // DESTROY ROUTE
-router.get(
-  "/api/campgrounds/:id/comments/:comment_id/delete",
+router.delete(
+  "/api/campgrounds/:id/comments/:comment_id",
   middleware.checkCommentOwnership,
   async (req, res) => {
     await Comment.findByIdAndRemove(req.params.comment_id);

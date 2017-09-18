@@ -24,5 +24,6 @@ var campgroundSchema = new mongoose.Schema({
       ]
 });
 
+campgroundSchema.index({name: 'text'});
 // compile a schema into a model
 module.exports = mongoose.model("Campground", campgroundSchema);

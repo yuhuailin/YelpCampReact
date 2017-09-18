@@ -14,9 +14,16 @@ router.get("/api/campgrounds/all", async (req, res) => {
 
 router.get("/api/campgrounds", async (req, res) => {
   console.log("search specific campgrounds");
-  const regex = new RegExp(escapeRegex(req.query.search), "gi");
-  const campgrounds = await Campground.find({ name: regex });
-  res.send(campgrounds);
+  //const regex = new RegExp(escapeRegex(req.query.search), "gi");
+  //const campgrounds = await Campground.find({ name: regex });
+  //res.send(campgrounds);
+  if (req.query.search == "") {
+    const campgrounds = await Campground.find();
+    res.send(campgrounds);
+  } else {
+    const campgrounds = await Campground.find({$text: {$search: req.query.search}});
+    res.send(campgrounds);
+  }
 });
 
 // CREATE route
@@ -67,6 +74,7 @@ router.post("/api/campgrounds", middleware.isLoggedIn, function(req, res) {
 
 // SHOW
 router.get("/api/campgrounds/:id", async (req, res) => {
+  console.log("show a campground");
   var campground = await Campground.findById(req.params.id).populate(
     "comments"
   );
@@ -74,10 +82,11 @@ router.get("/api/campgrounds/:id", async (req, res) => {
 });
 
 // // UPDATE CAMPGROUND ROUTE
-router.post(
-  "/api/campgrounds/:id/edit",
+router.put(
+  "/api/campgrounds/:id",
   middleware.checkCampgroundOwnership,
   async (req, res) => {
+    console.log("update campground");
     await geocoder.geocode(req.body.campground.location, async (err, data) => {
       req.body.campground.lat = data.results[0].geometry.location.lat;
       req.body.campground.lng = data.results[0].geometry.location.lng;
@@ -92,10 +101,11 @@ router.post(
 );
 
 // DESTROY ROUTE
-router.get(
-  "/api/campgrounds/:id/delete",
+router.delete(
+  "/api/campgrounds/:id",
   middleware.checkCampgroundOwnership,
   async (req, res) => {
+    console.log("delete campground");
     const campground = await Campground.findById(req.params.id);
     for (var i = 0; i < campground.comments.length; i++) {
       await Comment.findByIdAndRemove(campground.comments[i]);
