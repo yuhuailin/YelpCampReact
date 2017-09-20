@@ -26,12 +26,11 @@ class UserForm extends Component {
         <Header page={"register"} />
         <div className="row">
           <h1 style={{ textAlign: "center" }}>Sign Up</h1>
-          <div style={{ width: "30%", margin: "25px auto" }}>
+          <div className="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
             <form onSubmit={this.handleSubmit}>
               {renderFields(formFields)}
               <button
                 type="submit"
-                style={{ width: "35%" }}
                 className="btn btn-lg btn-primary pull-right"
               >
                 Sign Up

@@ -60,25 +60,27 @@ class CampgroundEdit extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div>
         <Header page="" />
-        <h1 style={{ textAlign: "center" }}>Edit Campground</h1>
-        <div style={{ width: "30%", margin: "25px auto" }}>
-          <form onSubmit={this.handleSubmit}>
-            {this.renderFields()}
-            <div className="form-group">
-              <button
-                type="submit"
-                style={{ width: "35%" }}
-                className="btn btn-lg btn-primary pull-right"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
-          <Link to="./" className="btn btn-lg btn-danger pull-left">
-            cancel
-          </Link>
+        <div className="row">
+          <h1 style={{ textAlign: "center" }}>Edit Campground</h1>
+          <div className="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+            <form onSubmit={this.handleSubmit}>
+              {this.renderFields()}
+              <div className="form-group">
+                <button
+                  type="submit"
+                  style={{ width: "35%" }}
+                  className="btn btn-lg btn-primary pull-right"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+            <Link to="./" className="btn btn-lg btn-danger pull-left">
+              cancel
+            </Link>
+          </div>
         </div>
       </div>
     );

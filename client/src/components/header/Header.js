@@ -7,19 +7,6 @@ import {LinkContainer} from 'react-router-bootstrap';
 import FlashMessage from './FlashMessage';
 
 class Header extends Component {
-  // renderErrorMessage() {
-  //   if (this.props.flash !== null) {
-  //     return (
-  //       <div className={`alert ${this.props.flash.className} role=alert`}>
-  //         {this.props.flash.msg}
-  //         <button onClick={this.props.closeFlash} className="close">
-  //           <span>&times;</span>
-  //         </button>
-  //       </div>
-  //     );
-  //   }
-  // }
-
   handleClick() {
     this.props.logout();
   }

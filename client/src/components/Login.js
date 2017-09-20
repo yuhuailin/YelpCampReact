@@ -42,7 +42,7 @@ class Login extends Component {
         <Header page="login" />
         <div className="row">
           <h1 style={{ textAlign: "center" }}>Login</h1>
-          <div style={{ width: "30%", margin: "25px auto" }}>
+          <div className="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <label>
