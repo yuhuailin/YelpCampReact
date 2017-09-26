@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_USER, FETCH_CAMPGROUND, FETCH_CAMPGROUNDS, FLASH_MESSAGE, USER_PROFILE } from "./types";
+import { FETCH_USER, FETCH_CAMPGROUND, FETCH_CAMPGROUNDS, FLASH_MESSAGE, USER_PROFILE,SUGGESTION } from "./types";
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get("/api/current_user");
@@ -24,6 +24,47 @@ export const submitSearch = value => async dispatch => {
   const res = await axios.get("/api/campgrounds?search=" + value);
   dispatch({ type: FETCH_CAMPGROUNDS, payload: res });
 };
+
+export const submitIndexSearch = value => async dispatch => {
+  const res = await axios.get("/api/campgroundsIndex?search=" + value);
+  dispatch({ type: FETCH_CAMPGROUNDS, payload: res });
+  dispatch({ type: SUGGESTION, payload: null });
+};
+
+export const suggest = value => async dispatch => {
+  if (value === "") {
+    dispatch({ type: SUGGESTION, payload: null });
+  } else {
+    var config = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Ocp-Apim-Subscription-Key": "7ad6daf8e5494e47bb865c62f30b5100"
+      }
+    };
+    var body = "text=" + value;
+    var result = await axios
+      .post(
+        "https://api.cognitive.microsoft.com/bing/v5.0/spellcheck/?mode=spell",
+        body,
+        config
+    );
+    var length = result.data.flaggedTokens.length;
+
+    var results = "";
+    for (var i = 0; i < length; i++) {
+      var query = result.data.flaggedTokens[i].suggestions[0].suggestion;
+      results += query;
+      if (i !== length - 1) {
+        results += ' ';
+      }
+    }
+    if (results === "") {
+      dispatch({ type: SUGGESTION, payload: null });
+    } else {
+      dispatch({ type: SUGGESTION, payload: results });
+    }
+  }
+}
 
 export const fetchCampgrounds = () => async dispatch => {
   const res = await axios.get("/api/campgrounds/all");

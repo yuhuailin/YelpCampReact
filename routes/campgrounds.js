@@ -14,16 +14,17 @@ router.get("/api/campgrounds/all", async (req, res) => {
 
 router.get("/api/campgrounds", async (req, res) => {
   console.log("search specific campgrounds");
-  //const regex = new RegExp(escapeRegex(req.query.search), "gi");
-  //const campgrounds = await Campground.find({ name: regex });
-  //res.send(campgrounds);
-  if (req.query.search == "") {
-    const campgrounds = await Campground.find();
-    res.send(campgrounds);
-  } else {
-    const campgrounds = await Campground.find({$text: {$search: req.query.search}});
-    res.send(campgrounds);
-  }
+  const regex = new RegExp(escapeRegex(req.query.search), "gi");
+  const campgrounds = await Campground.find({ name: regex });
+  res.send(campgrounds);
+});
+
+router.get("/api/campgroundsIndex", async (req, res) => {
+  console.log("search specific campgrounds index");
+  const campgrounds = await Campground.find({
+    $text: { $search: req.query.search }
+  });
+  res.send(campgrounds);
 });
 
 // CREATE route

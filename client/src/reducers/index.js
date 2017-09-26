@@ -5,6 +5,7 @@ import campgroundsReducer from "./campgroundsReducer";
 import campgroundReducer from "./campgroundReducer";
 import flashReducer from './flashReducer';
 import profileReducer from './profileReducer';
+import suggestionReducer from './suggestionReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   campgrounds: campgroundsReducer,
   campground: campgroundReducer,
   flash: flashReducer,
-  userprofile: profileReducer
+  userprofile: profileReducer,
+  suggestion: suggestionReducer
 });
